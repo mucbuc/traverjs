@@ -1,0 +1,24 @@
+{
+  "name": "traverjs",
+  "version": "0.0.0",
+  "description": "synchronous traversal",
+  "main": "main.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mucbuc/traverjs.git"
+  },
+  "author": "mbusenitz",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/mucbuc/traverjs/issues"
+  },
+  "homepage": "https://github.com/mucbuc/traverjs#readme",
+  "dependencies" : { 
+    "tape": "*",
+    "promise": "*",
+    "expector": "*"
+  }
+}
