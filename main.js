@@ -26,15 +26,19 @@ function traverseArray( array, cb ) {
 function traverseObject( obj, cb ) {
   
   assert( obj && typeof obj === 'object' );
-  assert( typeof cb === 'function' );
-
+  
   return new Promise( function( resolve, reject ) {
-    if (Object.keys(obj).length) {
+    var keys = Object.keys(obj);
+    if (keys.length) {
+ 
       var index = 0;
       next();
       function next() {
-        if (index < Object.keys(obj).length) {
-          cb( obj[Object.keys(obj)[index++]], next );
+        if (index < keys.length) {
+          var key = keys[index++]
+            , p = {};
+          p[key] = obj[key];
+          cb( p, next );
         }
         else {
           resolve(); 
@@ -47,7 +51,11 @@ function traverseObject( obj, cb ) {
   });
 }
 
-module.exports = {
-  array: traverseArray,
-  object: traverseObject,
+module.exports = function( subject, cb ) {
+  if (Array.isArray(subject)) {
+    return traverseArray(subject, cb);
+  }
+  if (typeof subject === 'object') {
+    return traverseObject(subject, cb);
+  }
 };
