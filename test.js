@@ -8,7 +8,7 @@ test( 'empty', function(t) {
   var expector = new Expector(t);
   expector.expectNot( 'then' );
   expector.expect( 'catch' );
-  traverjs( [] )
+  traverjs.array( [] )
   .then( function() {
     expector.emit( 'then' );
     expector.check();
@@ -23,10 +23,13 @@ test( 'basic', function(t) {
   var expector = new Expector(t);
   expector.expect( 'hello' );
   expector.expect( 'whale' );
-  traverjs( ['hello', 'whale' ], function(element, next) {
+  expector.expectNot( 'catch' );
+  traverjs.array( ['hello', 'whale' ], function(element, next) {
     expector.emit( element );
     next();
   })
   .then( expector.check.bind( expector ) )
-  .catch( expector.check.bind( expector ) ); 
+  .catch( function() {
+    expector.emit( 'catch' );
+  });
 });
