@@ -1,4 +1,5 @@
 ## EXAMPLE 1: 
+```  
   var expector = new Expector(t);
   expector.expect( 'hello' );
   expector.expect( 'whale' );
@@ -11,8 +12,10 @@
   .catch( function() {
     expector.emit( 'catch' );
   });
+```
 
 ## EXAMPLE 2: 
+```
   var expector = new Expector(t);
   expector.expect( { "hello": "whale" } );
   expector.expectNot( 'catch' );
@@ -24,3 +27,4 @@
   .catch( function() {
     expector.emit( 'catch' );
   });
+```
