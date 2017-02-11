@@ -1,6 +1,6 @@
 {
   "name": "traverjs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "synchronous traversal",
   "main": "main.js",
   "scripts": {
@@ -16,9 +16,8 @@
     "url": "https://github.com/mucbuc/traverjs/issues"
   },
   "homepage": "https://github.com/mucbuc/traverjs#readme",
-  "dependencies" : { 
+  "devDependencies" : { 
     "tape": "*",
-    "promise": "*",
     "expector": "*"
   }
 }

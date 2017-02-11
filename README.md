@@ -1,30 +1,33 @@
-## EXAMPLE 1: 
+## array example: 
 ```  
-var expector = new Expector(t);
-expector.expect( 'hello' );
-expector.expect( 'whale' );
-expector.expectNot( 'catch' );
-traverjs( ['hello', 'whale' ], function(element, next) {
-  expector.emit( element );
+traverjs( ['hello', 'whale' ], (element, next) => {
+  console.log( element );
   next();
 })
-.then( expector.check.bind( expector ) )
-.catch( function() {
-  expector.emit( 'catch' );
+.then( () => {
+  console.log( 'done' );
 });
+```
+=>
+```
+hello
+whale
+done
 ```
 
-## EXAMPLE 2: 
+
+## object example: 
 ```
-var expector = new Expector(t);
-expector.expect( { "hello": "whale" } );
-expector.expectNot( 'catch' );
-traverjs( { "hello": "whale" }, function(o, next) {
-  expector.emit( o );
+traverjs( { "hello": "whale" }, (element, next) => {
+  console.log( element );
   next();
-} )
-.then( expector.check.bind( expector ) )
-.catch( function() {
-  expector.emit( 'catch' );
+})
+.then( () => {
+  console.log( 'done' );
 });
+```
+=>
+```
+{ hello: 'whale' }
+done
 ```
