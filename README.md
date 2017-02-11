@@ -18,13 +18,13 @@ done
 
 ## object example: 
 ```
-  traverjs( { "hello": "whale" }, (element, next) => {
-    console.log( element );
-    next();
-  })
-  .then( () => {
-    console.log( 'done' );
-  });
+traverjs( { "hello": "whale" }, (element, next) => {
+  console.log( element );
+  next();
+})
+.then( () => {
+  console.log( 'done' );
+});
 ```
 =>
 ```
