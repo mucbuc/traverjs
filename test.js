@@ -6,19 +6,19 @@ var test = require( 'tape' )
 
 test( 'empty object', function(t) {
   var expector = new Expector(t);
+  
   expector.expectNot( 'cb' );
-  expector.expectNot( 'then' );
-  expector.expect( 'catch' );
+  expector.expectNot( 'catch' );
+  expector.expect( 'then' );
   traverjs( {}, function(o, next) {
     expector.emit( 'cb' );
     next();
   } )
   .then( function() {
-    expector.emit( 'then' );
+    expector.emit( 'then' ).check();
   } )
   .catch( function() {
-    expector.emit( 'catch' );
-    expector.check();
+    expector.emit( 'catch' ).check();
   });
 });
 
@@ -38,8 +38,8 @@ test( 'object', function(t) {
 
 test( 'empty array', function(t) {
   var expector = new Expector(t);
-  expector.expectNot( 'then' );
-  expector.expect( 'catch' );
+  expector.expect( 'then' );
+  expector.expectNot( 'catch' );
   traverjs( [] )
   .then( function() {
     expector.emit( 'then' );
