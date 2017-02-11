@@ -65,3 +65,16 @@ test( 'array', function(t) {
     expector.emit( 'catch' );
   });
 });
+
+test.only( 'string', function(t) {
+  var expector = new Expector(t);
+  expector.expect( 'word' );
+  traverjs( 'word', function(element, next) {
+    expector.emtt( element ); 
+    next();
+  })
+  .then( expector.check.bind( expector ) )
+  .catch( function() {
+    expector.emit( 'catch' );
+  });
+})
