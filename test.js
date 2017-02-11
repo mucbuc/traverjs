@@ -4,81 +4,58 @@ var test = require( 'tape' )
   , traverjs = require( './main.js' )
   , Expector = require( 'expector' ).SeqExpector;
 
-test( 'empty object', function(t) {
-  var expector = new Expector(t);
-  
-  expector.expectNot( 'cb' );
-  expector.expectNot( 'catch' );
-  expector.expect( 'then' );
-  traverjs( {}, function(o, next) {
-    expector.emit( 'cb' );
-    next();
-  } )
-  .then( function() {
-    expector.emit( 'then' ).check();
-  } )
-  .catch( function() {
-    expector.emit( 'catch' ).check();
-  });
+test( 'empty object', t => {
+  traverjs( {}, t.fail.bind( t, "callback should not get invoked" ) )
+  .then( t.end.bind( t ) )
+  .catch( t.fail.bind( t, "catch block should not get invoked" ) );
 });
 
-test( 'object', function(t) {
+test( 'object', t => {
   var expector = new Expector(t);
-  expector.expect( { "hello": "whale" } );
-  expector.expectNot( 'catch' );
-  traverjs( { "hello": "whale" }, function(o, next) {
+  
+  expector
+  .expect( { "hello": "whale" } )
+  .expectNot( 'catch' );
+  
+  traverjs( { "hello": "whale" }, (o, next) => {
     expector.emit( o );
     next();
   } )
   .then( expector.check.bind( expector ) )
-  .catch( function() {
-    expector.emit( 'catch' );
-  });
+  .catch( t.fail.bind( t, "catch block should not get invoked" ) );
 });
 
-test( 'empty array', function(t) {
-  var expector = new Expector(t);
-  expector.expect( 'then' );
-  expector.expectNot( 'catch' );
-  expector.expectNot( 'cb' );
-  traverjs( [], function(o, next) {
-    expector.emit( 'cb' );
-    next();
-  })
-  .then( function() {
-    expector.emit( 'then' );
-    expector.check();
-  } )
-  .catch( function() {
-    expector.emit( 'catch' );
-    expector.check();
-  });
+test( 'empty array', t => {
+  traverjs( [], t.fail.bind( t, "callback should not get invoked" ) )
+  .then( t.end.bind( t ) )
+  .catch( t.fail.bind( t, "catch block should not get invoked" ) );
 });
 
-test( 'array', function(t) {
+test( 'array', t => {
   var expector = new Expector(t);
-  expector.expect( 'hello' );
-  expector.expect( 'whale' );
-  expector.expectNot( 'catch' );
-  traverjs( ['hello', 'whale' ], function(element, next) {
+  
+  expector
+  .expect( 'hello' )
+  .expect( 'whale' )
+  .expectNot( 'catch' );
+
+  traverjs( ['hello', 'whale' ], (element, next) => {
     expector.emit( element );
     next();
   })
   .then( expector.check.bind( expector ) )
-  .catch( function() {
-    expector.emit( 'catch' );
-  });
+  .catch( t.fail.bind( t, "catch block should not get invoked" ) );
 });
 
-test( 'string', function(t) {
+test( 'string', t => {
   var expector = new Expector(t);
+  
   expector.expect( 'word' );
-  traverjs( 'word', function(element, next) {
+  
+  traverjs( 'word', (element, next) => {
     expector.emit( element ); 
     next();
   })
   .then( expector.check.bind( expector ) )
-  .catch( function() {
-    expector.emit( 'catch' );
-  });
+  .catch( t.fail.bind( t, "catch block should not get invoked" ) );
 })
