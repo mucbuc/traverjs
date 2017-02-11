@@ -14,8 +14,7 @@ test( 'object', t => {
   var expector = new Expector(t);
   
   expector
-  .expect( { "hello": "whale" } )
-  .expectNot( 'catch' );
+  .expect( { "hello": "whale" } );
   
   traverjs( { "hello": "whale" }, (o, next) => {
     expector.emit( o );
@@ -36,8 +35,7 @@ test( 'array', t => {
   
   expector
   .expect( 'hello' )
-  .expect( 'whale' )
-  .expectNot( 'catch' );
+  .expect( 'whale' );
 
   traverjs( ['hello', 'whale' ], (element, next) => {
     expector.emit( element );
