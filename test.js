@@ -40,7 +40,11 @@ test( 'empty array', function(t) {
   var expector = new Expector(t);
   expector.expect( 'then' );
   expector.expectNot( 'catch' );
-  traverjs( [] )
+  expector.expectNot( 'cb' );
+  traverjs( [], function(o, next) {
+    expector.emit( 'cb' );
+    next();
+  })
   .then( function() {
     expector.emit( 'then' );
     expector.check();
