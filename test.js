@@ -66,11 +66,11 @@ test( 'array', function(t) {
   });
 });
 
-test.only( 'string', function(t) {
+test( 'string', function(t) {
   var expector = new Expector(t);
   expector.expect( 'word' );
   traverjs( 'word', function(element, next) {
-    expector.emtt( element ); 
+    expector.emit( element ); 
     next();
   })
   .then( expector.check.bind( expector ) )

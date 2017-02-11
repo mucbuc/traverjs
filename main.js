@@ -59,4 +59,7 @@ module.exports = function( subject, cb ) {
   if (typeof subject === 'object') {
     return traverseObject(subject, cb);
   }
+  return new Promise( function(resolve) {
+    cb(subject, resolve);
+  });
 };
