@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 var test = require( 'tape' )
   , traverjs = require( './main.js' )
   , Expector = require( 'expector' ).SeqExpector;
