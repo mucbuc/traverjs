@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require( 'assert' ); 
+const assert = require( 'assert' ); 
 
 function traverseArray( array, cb ) {
   
@@ -31,7 +31,7 @@ function traverseObject( obj, cb ) {
 
     function next() {
       if (index < keys.length) {
-        var key = keys[index++]
+        const key = keys[index++];
         cb( { [key]: obj[key] }, next );
       }
       else {
