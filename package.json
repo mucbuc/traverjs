@@ -18,6 +18,8 @@
   "homepage": "https://github.com/mucbuc/traverjs#readme",
   "devDependencies" : { 
     "tape": "*",
-    "expector": "*"
+    "expector": "*",
+    "tape-run": "*",
+    "browserify": "*"
   }
 }
