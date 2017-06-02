@@ -4,7 +4,7 @@
   "description": "synchronous traversal",
   "main": "main.js",
   "scripts": {
-    "test": "tape test.js && browserify test.js | tape-run"
+    "test": "tape test.js"
   },
   "repository": {
     "type": "git",
